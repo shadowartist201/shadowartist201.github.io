@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+<title>ShadowArtist201</title>
+<link rel="stylesheet" type="text/css" href="https://himdek.github.io/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+
+<script>
+fetch("https://api.github.com/users/ShadowArtist201/repos").then(res => res.json()).then((out) => {
+	count = 0;
+	for (let i = 0; ; i++) {
+		if (out[i] == null) {
+			break;
+		}
+		if (out[i].name.toLowerCase() == out[i].owner.login.toLowerCase() || out[i].name.toLowerCase() == out[i].owner.login.toLowerCase() + ".github.io") {
+			continue;
+		}
+		count++;
+	}
+	document.getElementById("repos").innerHTML = document.getElementById("repos").innerHTML + " <span>" + count + "</span>"
+})
+</script>
+
+<div id="content" class="main"></div>
+<script>
+fetch("README.md").then(function(response) {
+      response.text().then(function(text) {
+    	  document.getElementById("content").innerHTML = marked.parse(text);
+      });
+});
+</script>
+
+</body>
+</html>
